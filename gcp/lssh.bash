@@ -21,5 +21,6 @@ if [ "$ip" == "" ]; then
 	exit 2
 else
 	echo "the ip is ${ip}. OK"
-	exec ssh $ip
+	# exec ssh $ip
+	exec ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $ip
 fi 
