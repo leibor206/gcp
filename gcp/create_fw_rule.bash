@@ -24,7 +24,7 @@ echo ""
 if [ "$fw_from_cloud" == "" ]; then
 	echo "  No Firewall rule for : " $fw_name
 	echo "  about to create rule for : " $fw_name
-	rc=`gcloud compute firewall-rules create ${fw_name} --action=ALLOW --rules=tcp:6379 --source-ranges=${my_real_ip} --target-tags=${fw_name}`
+	rc=`gcloud compute firewall-rules create ${fw_name} --action=ALLOW --rules=tcp:9092,tcp:2181 --source-ranges=${my_real_ip} --target-tags=${fw_name}`
 	echo "    rc from create fw : " $rc
 else
 	echo "  Found fw rule going to re-create it"
@@ -33,7 +33,7 @@ else
     rc=`gcloud compute firewall-rules delete ${fw_name} --quiet`
 	echo "    rc from delete : " $rc
 
-	rc=`gcloud compute firewall-rules create ${fw_name} --action=ALLOW --rules=tcp:6379 --source-ranges=${my_real_ip} --target-tags=${fw_name}`
+	rc=`gcloud compute firewall-rules create ${fw_name} --action=ALLOW --rules=tcp:9092 --source-ranges=${my_real_ip} --target-tags=${fw_name}`
 	echo "    rc from create fw : " $rc
 fi
 
