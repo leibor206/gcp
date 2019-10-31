@@ -25,8 +25,8 @@ if [ $rc -ne 0 ]; then
 	exit $rc
 fi
 
-# get hostname+ip in csv format without header
-tmp_str=`gcloud compute instances list --format="csv[no-heading](NAME,EXTERNAL_IP)"`
+# get hostname+ip in csv format without header and only host with external_ip(means vm is on)
+tmp_str=`gcloud compute instances list --format="csv[no-heading](NAME,EXTERNAL_IP)" --filter="EXTERNAL_IP:*"`
 echo $tmp_str
 
 # array to hold : host,ip
